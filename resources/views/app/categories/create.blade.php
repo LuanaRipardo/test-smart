@@ -6,7 +6,7 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>Criação de categoria</h1>
+            <h1>Criação da marca</h1>
         </div>
 
         @if(\Session::has('success'))
@@ -18,7 +18,7 @@
         <div class="section-body">
             <div class="card">
                 <div class="d-flex justify-content-between card-header">
-                    <h4>Crie uma nova categoria</h4>
+                    <h4>Crie uma nova marca</h4>
                 </div>
 
                 <div class="card-body">
@@ -26,7 +26,7 @@
                         @csrf
 
                         <div class="form-group">
-                            Nome da categoria
+                            Nome da marca
                             <input type="text" id="name" name="name" class="form-control">
                         </div>
                         <button class="btn btn-primary">Salvar</button>

@@ -3,21 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Model;
 
-class ProductsController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $name = $request->name;
-        $products = Product::orderBy('name', 'desc')->where('name', 'LIKE', "%$name%")->paginate(10);
-        return view('app.products.index', compact('products'));
+        $categories = Category::paginate();
+        return view('app.categories.index', compact('categories'));
     }
 
     /**
@@ -27,8 +26,7 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        $categorias = Category::all();
-        return view('app.products.create', compact('categorias'));
+        return view('app.categories.create');
     }
 
     /**
@@ -39,13 +37,8 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'price' => 'required',
-            'description' => 'required'
-        ]);
-        Product::create($request->all());
-        return redirect()->back()->with('success', 'Produto salvo com sucesso!');
+        Category::create($request->all());
+        return redirect()->back()->with('success', 'Categoria salva com sucesso!');
     }
 
     /**
@@ -56,9 +49,7 @@ class ProductsController extends Controller
      */
     public function show($id)
     {
-        $product = Product::find($id);
-        $categorias = Category::get();
-        return view('app.products.edit', compact('product', 'categorias'));
+        //
     }
 
     /**
@@ -81,13 +72,7 @@ class ProductsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'name' => 'required',
-            'price' => 'required',
-            'description' => 'required'
-        ]);
-        Product::find($id)->update($request->all());
-        return redirect()->back()->with('success', 'Produto atualizado com sucesso!');
+        //
     }
 
     /**
@@ -98,7 +83,7 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
-        Product::find($id)->delete();
-        return redirect()->back()->with('success', 'Produto apagado com sucesso!');
+        Category::find($id)->delete();
+        return redirect()->back()->with('success', 'Categoria apagada com sucesso!');
     }
 }

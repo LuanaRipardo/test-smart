@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use Illuminate\Http\Request;
 
-class CategoriesController extends Controller
+class DetailController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +13,7 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        $categories = Category::paginate();
-        return view('app.categories.index', compact('categories'));
+        //
     }
 
     /**
@@ -25,7 +23,7 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-        return view('app.categories.create');
+        //
     }
 
     /**
@@ -36,8 +34,7 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        Category::create($request->all());
-        return redirect()->back()->with('success', 'Categoria salva com sucesso!');
+        //
     }
 
     /**
@@ -82,7 +79,6 @@ class CategoriesController extends Controller
      */
     public function destroy($id)
     {
-        Category::find($id)->delete();
-        return redirect()->back()->with('success', 'Categoria apagada com sucesso!');
+        //
     }
 }

@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 
-@section('title', 'Criação de produto')
+@section('title', 'Criação de carro')
 
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>Criação de produto</h1>
+            <h1>Criação de carro</h1>
         </div>
 
         @if(\Session::has('success'))
@@ -14,7 +14,6 @@
                 {{ Session::get('success') }}
             </div>
         @endif
-
 
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -25,44 +24,48 @@
                 </ul>
             </div>
         @endif
-
         <div class="section-body">
             <div class="card">
                 <div class="d-flex justify-content-between card-header">
-                    <h4>Crie um novo produto</h4>
+                    <h4>Crie um novo carro</h4>
                 </div>
 
                 <div class="card-body">
-                    <form action="{{ route('produtos.update', $product->id) }}" method="post">
+                    <form action="{{ route('carros.store') }}" method="post">
                         @csrf
-                        @method('PUT')
 
                         <div class="row">
                             <div class="col-sm-4">
                                 <div class="form-group">
-                                    Nome do produto
-                                    <input type="text" id="name" name="name" class="form-control"
-                                           value="{{ $product->name }}">
+                                    Nome do carro
+                                    <input type="text" id="name" name="name" class="form-control">
                                 </div>
                             </div>
                             <div class="col-sm-4">
-                                Categoria
-                                <select name="categories_id" class="form-control">
-                                    @foreach($categorias as $categoria)
-                                        <option
-                                            value="{{ $categoria->id }}" {{ $product->categories_id == $categoria->id ? 'selected' : '' }}>{{ $categoria->name }}</option>
+                                Marca
+                                <select name="category_id" class="form-control">
+                                    @foreach($categories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="col-sm-4">
-                                Valor do produto
-                                <input type="text" name="price" value="{{ $product->price }}" class="form-control">
+                                Ano
+                                <input type="text" name="year" class="form-control">
                             </div>
-                            <div class="col-sm-12">
-                                Descrição do produto
-                                <textarea name="description" class="form-control"
-                                          style="height: 100px;">{{ $product->description }}</textarea>
+                            <div class="col-sm-4">
+                                Combustivel
+                                <input type="text" name="fuel" class="form-control">
                             </div>
+                            <div class="col-sm-4">
+                                Câmbio
+                                <input type="text" name="exchange" class="form-control">
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label for="image">Imagem</label>
+                            <input type="file" name="image" class="form-control" id="image">
                         </div>
                         <br>
                         <button class="btn btn-primary">Salvar</button>

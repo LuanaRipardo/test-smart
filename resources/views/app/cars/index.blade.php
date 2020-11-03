@@ -1,18 +1,18 @@
 @extends('layouts.app')
 
 
-@section('title', 'Produtos')
+@section('title', 'Carros')
 
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>Produtos</h1>
+            <h1>Carros</h1>
         </div>
 
         <div class="card">
             <form action="" class="form">
                 <div class="card-header">
-                    <h4>Busca de produtos</h4>
+                    <h4>Busca de carros</h4>
                 </div>
                 <div class="card-body">
                     Nome
@@ -34,8 +34,8 @@
         <div class="section-body">
             <div class="card">
                 <div class="d-flex justify-content-between card-header">
-                    <h4>Todos produtos</h4>
-                    <a href="{{ route('produtos.create') }}" class="btn btn-round btn-primary">Nova produto</a>
+                    <h4>Todos os carros</h4>
+                    <a href="{{ route('carros.create') }}" class="btn btn-round btn-primary">Novo carros</a>
                 </div>
 
                 <div class="card-body">
@@ -43,25 +43,28 @@
                         <thead>
                         <tr>
                             <th>#</th>
+                            <th>Imagem</th>
                             <th>Nome</th>
-                            <th>Categoria</th>
-                            <th>Valor</th>
-                            <th>Ações</th>
+                            <th>Marca</th>
+                            <th>Ano</th>
+                            <th>Câmbio</th>
+                            <th>Combustivel</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($products as $product)
+                        @foreach($cars as $car)
                             <tr>
-                                <td>{{ $product->id }}</td>
-                                <td>{{ $product->name }}</td>
-                                <td>{{ $product->category->name }}</td>
+                                <td>{{ $car->id }}</td>
+                                <td><img src="{{ asset('storage/'.$car->image) }}" width="50" alt=""></td>
+                                <td>{{ $car->name }}</td>
+                                <td>{{ $car->brand->name ?? 'não encontrado' }}</td>
+                                <td>{{ $car->year}}</td>
+                                <td>{{ $car->exchange}}</td>
+                                <td>{{ $car->fuel}}</td>
                                 <td>
-                                    <b>R$ {{ number_format($product->price, 2, ',', '.') }}</b>
-                                </td>
-                                <td>
-                                    <a href="{{ route('produtos.show', $product->id) }}" class="btn btn-primary">Ver/Editar</a>
+                                    <a href="{{ route('carros.show', $car->id) }}" class="btn btn-primary">Ver/Editar</a>
 
-                                    <form action="{{ route('produtos.destroy', $product->id) }}" method="post">
+                                    <form action="{{ route('carros.destroy', $car->id) }}" method="post">
                                         @method('DELETE')
                                         @csrf
                                         <button href="#" class="btn btn-danger">Apagar</button>
@@ -71,7 +74,7 @@
                         @endforeach
                         </tbody>
                     </table>
-                    {{ $products->links() }}
+                    {{ $cars->links() }}
                 </div>
             </div>
         </div>
